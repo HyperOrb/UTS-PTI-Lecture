@@ -26,9 +26,8 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <p>Please enter your name and NIM:</p>
-        <input type="text" id="nameInput" class="form-control mb-2" placeholder="Name">
-        <input type="text" id="idInput" class="form-control" placeholder="NIM">
+        <p>Please enter your name:</p>
+        <input type="text" id="modalnameInput" class="form-control mb-2" placeholder="Name">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="saveUserData()">Save</button>
@@ -37,15 +36,56 @@
   </div>
 </div>
 
+
 <div id="greetings" class="greetings" style="display: none;">
-    <span>Hello, <span id="userName"></span>!</span> <span id="userId"></span>
+    <span>Hello, <span id="userName"></span>!</span> <span id="userId"></span> 
+    <div id="clock" class="clock"></div>
 </div>
 
 <hr class="my-3">
 
 <div class="quotes">
-    <h3>Education starts with <span class="auto-type"></span></h3>
+    <h5>Education starts with <span class="auto-type"></span></h5>
 </div>
+
+<hr class="my-3">
+
+<div class="container mt-4">
+  <h2>Data Table</h2>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>NIM</th>
+              <th>Name</th>
+              <th>Alamat</th>
+              <th>Pengaturan</th>
+          </tr>
+      </thead>
+      <tbody id="dataTableBody">
+          <!-- Table rows will be dynamically populated here -->
+      </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Add Data</h2>
+  <form id="addDataForm">
+      <div class="form-group">
+          <label for="nimInput">NIM:</label>
+          <input type="text" class="form-control" id="nimInput" required>
+      </div>
+      <div class="form-group">
+          <label for="nameInput">Name:</label>
+          <input type="text" class="form-control" id="nameInput" required>
+      </div>
+      <div class="form-group">
+          <label for="alamatInput">Alamat:</label>
+          <input type="text" class="form-control" id="alamatInput" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Data</button>
+  </form>
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

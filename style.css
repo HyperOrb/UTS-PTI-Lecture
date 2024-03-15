@@ -44,12 +44,6 @@
     position: relative;
 }
 
-#greetings #userId {
-    position: absolute; 
-    right: 0;
-    padding-right: 20px;
-}
-
 hr.my-3 {
   height: 0;
   margin-left: 20px;
@@ -60,4 +54,18 @@ hr.my-3 {
     text-align: left;
     margin-top: 20px;
     padding-left: 20px;
+}
+
+.auto-type {
+    color: red;
+    font-size: 18px;
+    font-weight: bold; 
+}
+
+.clock {
+  position: absolute; 
+  right: 0;
+  padding-right: 20px;
+  bottom: 5px;
+  font-weight: bold;
 }
