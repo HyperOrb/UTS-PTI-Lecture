@@ -12,8 +12,8 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-black">
     <span class="navbar-brand mb-0 h1">
-        <span class="text-green">Inventory</span> 
-        <span class="text-red">Management</span> 
+        <span class="text-green">DATA</span> 
+        <span class="text-red">MAHASISWA</span> 
         <span class="text-lightblue">||</span>
     </span>
 </nav>
@@ -26,9 +26,9 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <p>Please enter your name and ID:</p>
+        <p>Please enter your name and NIM:</p>
         <input type="text" id="nameInput" class="form-control mb-2" placeholder="Name">
-        <input type="text" id="idInput" class="form-control" placeholder="ID">
+        <input type="text" id="idInput" class="form-control" placeholder="NIM">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="saveUserData()">Save</button>
@@ -41,12 +41,24 @@
     <span>Hello, <span id="userName"></span>!</span> <span id="userId"></span>
 </div>
 
+<hr class="my-3">
 
-
+<div class="quotes">
+    <h3>Education starts with <span class="auto-type"></span></h3>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+  var typed = new Typed( '.auto-type', {
+    strings: ["You", "Ourselves", "Love", "Passion"],
+    typeSpeed:150,
+    backSpeed:150,
+    loop:true,
+  })
+</script>
 <script src="script.js"></script>
 
 </body>
