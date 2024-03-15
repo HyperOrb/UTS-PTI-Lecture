@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TokTok</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>  
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+    <span class="navbar-brand mb-0 h1">
+        <span class="text-green">Inventory</span> 
+        <span class="text-red">Management</span> 
+        <span class="text-lightblue">||</span>
+    </span>
+</nav>
+
+<div id="myModal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Welcome to TokTok!</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Please enter your name and ID:</p>
+        <input type="text" id="nameInput" class="form-control mb-2" placeholder="Name">
+        <input type="text" id="idInput" class="form-control" placeholder="ID">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="saveUserData()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="greetings" class="greetings" style="display: none;">
+    <span>Hello, <span id="userName"></span>!</span> <span id="userId"></span>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
