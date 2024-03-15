@@ -32,8 +32,8 @@ updateClock();
 
 
 var data = [
-    { nim: '123', name: 'John Doe', alamat: '123 Street, City' },
-    { nim: '456', name: 'Jane Smith', alamat: '456 Avenue, Town' }
+    { nim: '00000092718', name: 'Ryann Chandiari', alamat: 'Makassar Pride' },
+    { nim: 'Rine123', name: '123Sugar', alamat: 'Redoxon' }
 ];
 
 function populateTable() {
