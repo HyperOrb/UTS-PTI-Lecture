@@ -52,27 +52,29 @@
 
 <div class="container mt-4 animated fadeIn">
     <div id="tableInfo"></div>
-    <div id="entriesPerPageContainer">
+    <div id="entriesPerPageContainer" class="form-group">
         <label for="entriesPerPage">Entries per page:</label>
-        <select id="entriesPerPage">
+        <select id="entriesPerPage" class="form-control">
             <option value="5">5</option>
             <option value="10" selected>10</option>
             <option value="15">15</option>
             <option value="20">20</option>
         </select>
     </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>NIM</th>
-            <th>Name</th>
-            <th>Alamat</th>
-            <th>Pengaturan</th>
-        </tr>
-        </thead>
-        <tbody id="dataTableBody">
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>NIM</th>
+                <th>Name</th>
+                <th>Alamat</th>
+                <th>Pengaturan</th>
+            </tr>
+            </thead>
+            <tbody id="dataTableBody">
+            </tbody>
+        </table>
+    </div>
 
     <hr class="animated fadeIn">
 
