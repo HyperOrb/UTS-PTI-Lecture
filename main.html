@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TokTok</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokTok</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>  
+<body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-black">
-  <span class="navbar-brand mb-0 h1">
-      <span class="text-green">DATA</span> 
-      <span class="text-red">MAHASISWA</span> 
-      <span class="text-lightblue">||</span>
-  </span>
+    <span class="navbar-brand mb-0 h1">
+        <span class="text-green">DATA</span>
+        <span class="text-red">MAHASISWA</span>
+        <span class="text-lightblue">||</span>
+    </span>
 </nav>
 
 <div id="myModal" class="modal animated fadeIn">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Welcome to TokTok!</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p class="animated fadeIn">Please enter your name:</p>
-        <input type="text" id="modalnameInput" class="form-control mb-2 animated fadeIn" placeholder="Name">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary animated fadeIn" onclick="saveUserData()">Save</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Welcome to TokTok!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="animated fadeIn">Please enter your name:</p>
+                <input type="text" id="modalnameInput" class="form-control mb-2 animated fadeIn" placeholder="Name">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary animated fadeIn" onclick="saveUserData()">Save</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div id="greetings" class="greetings" style="display: none;">
@@ -51,47 +51,92 @@
 <hr class="my-3 animated fadeIn">
 
 <div class="container mt-4 animated fadeIn">
-  <div id="tableInfo"></div>
-  <div id="entriesPerPageContainer">
-    <label for="entriesPerPage">Entries per page:</label>
-    <select id="entriesPerPage">
-      <option value="5">5</option>
-      <option value="10" selected>10</option>
-      <option value="15">15</option>
-      <option value="20">20</option>
-    </select>
-  </div>
-  <table class="table">
-      <thead>
-          <tr>
-              <th>NIM</th>
-              <th>Name</th>
-              <th>Alamat</th>
-              <th>Pengaturan</th>
-          </tr>
-      </thead>
-      <tbody id="dataTableBody">
-      </tbody>
-  </table>
-  
-  <hr class="animated fadeIn">
+    <div id="tableInfo"></div>
+    <div id="entriesPerPageContainer">
+        <label for="entriesPerPage">Entries per page:</label>
+        <select id="entriesPerPage">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>NIM</th>
+            <th>Name</th>
+            <th>Alamat</th>
+            <th>Pengaturan</th>
+        </tr>
+        </thead>
+        <tbody id="dataTableBody">
+        </tbody>
+    </table>
 
-  <h2>Add Data</h2>
-  <form id="addDataForm">
-      <div class="form-group">
-          <label for="nimInput">NIM:</label>
-          <input type="text" class="form-control" id="nimInput" required placeholder="Nomor Induk Mahasiswa">
-      </div>
-      <div class="form-group">
-          <label for="nameInput">Name:</label>
-          <input type="text" class="form-control" id="nameInput" required placeholder="Nama Lengkap">
-      </div>
-      <div class="form-group">
-          <label for="alamatInput">Alamat:</label>
-          <input type="text" class="form-control" id="alamatInput" required placeholder="Alamat Tempat Tinggal">
-      </div>
-      <button type="submit" class="btn btn-primary">Add Data</button>
-  </form>
+    <hr class="animated fadeIn">
+
+    <h2>Add Data</h2>
+    <form id="addDataForm">
+        <div class="form-group">
+            <label for="nimInput">NIM:</label>
+            <input type="text" class="form-control" id="nimInput" required placeholder="Nomor Induk Mahasiswa">
+        </div>
+        <div class="form-group">
+            <label for="nameInput">Name:</label>
+            <input type="text" class="form-control" id="nameInput" required placeholder="Nama Lengkap">
+        </div>
+        <div class="form-group">
+            <label for="alamatInput">Alamat:</label>
+            <input type="text" class="form-control" id="alamatInput" required placeholder="Alamat Tempat Tinggal">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Data</button>
+    </form>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="editNIMInput">NIM:</label>
+                        <input type="text" class="form-control" id="editNIMInput" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="editNameInput">Name:</label>
+                        <input type="text" class="form-control" id="editNameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="editAlamatInput">Alamat:</label>
+                        <input type="text" class="form-control" id="editAlamatInput">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editModalSave">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="feedbackMessage"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
