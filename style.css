@@ -5,20 +5,16 @@
 .navbar-brand {
   color: #fff;
   font-size: 24px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 500;
   font-style: normal;
 }
 
 .text-green {
-  color: green;
+  color: white;
 }
 
 .text-red {
-  color: red;
-}
-
-.text-lightblue {
   color: lightblue;
 }
 
@@ -68,7 +64,7 @@ hr.my-3 {
 }
 
 .table {
-  width: calc(100% - 20px);
+  width: calc(100%);
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -106,4 +102,45 @@ hr.my-3 {
 .btn-delete {
   background-color: #f44336;
   color: white
+}
+
+.container h4 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #000000; /* Black background color for the entire page */
+  color: #ffffff; /* Light text color for the entire page */
+}
+
+.dark-mode .navbar {
+  background-color: #1a1a1a; /* Dark background color for the navbar */
+}
+
+.dark-mode .navbar-brand {
+  color: #ffffff; /* Light text color for the navbar brand */
+}
+
+.dark-mode .greetings span {
+  color: #ffffff; /* Light text color for greetings */
+}
+
+.dark-mode .quotes h5 {
+  color: #ffffff; /* Light text color for quotes */
+}
+
+/* Keep the table white */
+.table {
+  background-color: #ffffff; /* White background color for the table */
+  padding: 15px; /* Add padding to the table */
+}
+
+.dark-mode .table th {
+  background-color: #292929; /* Dark background color for table headers */
+  color: #ffffff; /* Light text color for table headers */
+}
+
+.dark-mode .table tbody tr:hover {
+  background-color: #333333; 
 }

@@ -51,13 +51,13 @@ function populateTable() {
   }
 
   for (var i = startIndex; i < endIndex; i++) {
-      var item = data[i];
-      var row = $('<tr>');
-      row.append($('<td>').text(item.nim));
-      row.append($('<td>').text(item.name));
-      row.append($('<td>').text(item.alamat));
-      row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn">Edit</button> <button class="btn btn-danger btn-sm delete-btn">Delete</button>'));
-      tableBody.append(row);
+    var item = data[i];
+    var row = $('<tr>');
+    row.append($('<td>').text(item.nim));
+    row.append($('<td>').text(item.name));
+    row.append($('<td>').text(item.alamat));
+    row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button> <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>'));
+    tableBody.append(row);
   }
 
   var entryCountMessage = "Showing " + (startIndex + 1) + " to " + endIndex + " of " + data.length + " entries.";
@@ -80,13 +80,39 @@ $('#addDataForm').submit(function (event) {
   }
 });
 
+$('#addDataFormSubmitBtn').click(function(event) {
+  event.preventDefault();
+  var nim = $('#nimInput').val();
+  var name = $('#nameInput').val();
+  var alamat = $('#alamatInput').val();
+  if (nim && name && alamat) {
+    data.push({ nim: nim, name: name, alamat: alamat });
+    saveDataToLocalStorage();
+    populateTable();
+    $('#nimInput, #nameInput, #alamatInput').val('');
+    showFeedback('Data berhasil ditambahkan.', 'success');
+  } else {
+    showFeedback('Gagal menambahkan data. Pastikan semua kolom terisi.', 'danger');
+  }
+});
+
+
 $('#entriesPerPage').change(function () {
   populateTable();
 });
 
 populateTable();
 
-// Function to save data to localStorage
+function resetForm() {
+  document.getElementById("nimInput").value = "";
+  document.getElementById("nameInput").value = "";
+  document.getElementById("alamatInput").value = "";
+}
+document.getElementById("resetForm").addEventListener("click", function (event) {
+  event.preventDefault();
+  resetForm();
+});
+
 function saveDataToLocalStorage() {
   localStorage.setItem('mahasiswaData', JSON.stringify(data));
 }
@@ -95,7 +121,7 @@ $(document).on('click', '.edit-btn', function () {
   var index = $(this).closest('tr').index();
   var item = data[index];
 
-  $('#editNIMInput').val(item.nim).prop('disabled', true); 
+  $('#editNIMInput').val(item.nim).prop('disabled', true);
   $('#editNameInput').val(item.name);
   $('#editAlamatInput').val(item.alamat);
 
@@ -115,21 +141,13 @@ $(document).on('click', '.edit-btn', function () {
 
 $(document).on('click', '.delete-btn', function () {
   var index = $(this).closest('tr').index();
-  if (confirm('Are you sure you want to delete this entry?')) {
+  if (confirm('Apakah yakin ingin mengubah ?')) {
     data.splice(index, 1);
     saveDataToLocalStorage();
     populateTable();
-    showFeedback('Data berhasil dihapus.', 'warning');
+    showFeedback('Data berhasil dihapus.', 'deleted');
   }
 });
-
-// Function to save data to localStorage
-function saveDataToLocalStorage() {
-  localStorage.setItem('mahasiswaData', JSON.stringify(data));
-}
-
-// Initial population of table
-populateTable();
 
 function showFeedback(message, type) {
   var alertClass = '';
@@ -140,7 +158,7 @@ function showFeedback(message, type) {
     case 'info':
       alertClass = 'alert-info';
       break;
-    case 'warning':
+    case 'deleted':
       alertClass = 'alert-warning';
       break;
     case 'danger':
@@ -153,7 +171,7 @@ function showFeedback(message, type) {
   var alertHTML = `
   <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="cursor:pointer;opacity:.85;position:fixed;top:20px;right:20px;z-index:9999;">
     <strong>${type.charAt(0).toUpperCase() + type.slice(1)}!</strong> ${message}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <button type="button" class="close" data -dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
     <div class="progress active" role="progressbar" style="height:5px">
@@ -186,9 +204,9 @@ function showFeedback(message, type) {
   });
 
   function update() {
-      currentChunk += 0.01;
-      var progPercent = 100 - (currentChunk * (100 / chunks));
-      $(".progress-bar").css('width', progPercent + '%');
+    currentChunk += 0.01;
+    var progPercent = 100 - (currentChunk * (100 / chunks));
+    $(".progress-bar").css('width', progPercent + '%');
 
     if (progPercent <= 0) {
       $(".alert").remove();
@@ -197,3 +215,61 @@ function showFeedback(message, type) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  var table = document.querySelector('.table');
+  var headers = table.querySelectorAll('th');
+  
+  headers.forEach(function (header, index) {
+      header.addEventListener('click', function () {
+          sortTable(index);
+      });
+  });
+
+  function sortTable(columnIndex) {
+      var rows = Array.from(table.querySelectorAll('tbody tr'));
+
+      rows.sort(function (rowA, rowB) {
+          var cellA = rowA.cells[columnIndex].textContent.trim();
+          var cellB = rowB.cells[columnIndex].textContent.trim();
+
+          if (columnIndex === 0 || columnIndex === 2) {
+              return cellA.localeCompare(cellB);
+          } else {
+              return cellA.localeCompare(cellB, undefined, { numeric: true });
+          }
+      });
+
+      var tbody = table.querySelector('tbody');
+      rows.forEach(function (row) {
+          tbody.appendChild(row);
+      });
+  }
+});
+
+// Dark mode toggle functionality
+document.getElementById('darkModeToggle').addEventListener('click', function() {
+  // Toggle dark mode class on the body
+  document.body.classList.toggle('dark-mode');
+
+  // Save dark mode preference to localStorage
+  var darkModeEnabled = document.body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', darkModeEnabled);
+});
+
+// Check if dark mode preference is saved in localStorage
+var darkModeEnabled = localStorage.getItem('darkMode');
+
+// If dark mode preference exists, apply it
+if (darkModeEnabled) {
+  document.body.classList.add('dark-mode');
+}
+
+$(".inner-switch").on("click", function() {
+  if ($("body").hasClass("dark")) {
+    $("body").removeClass("dark");
+    $(".inner-switch").text("OFF");
+  } else {
+    $("body").addClass("dark");
+    $(".inner-switch").text("ON");
+  }
+});

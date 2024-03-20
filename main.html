@@ -7,17 +7,17 @@
     <title>TokTok</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-nD5PklTLw+5f6cNYd0ZYJ4tP3jnGY3D5KRyeQkiR7ud9R9jzjkgrnYtjGcbC93d2JW9Iu3/uYAFpbtzlqzzJ/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
         <span class="navbar-brand mb-0 h1">
             <span class="text-green">DATA</span>
-            <span class="text-red">MAHASISWA</span>
-            <span class="text-lightblue">||</span>
+            <span class="text-red">LIBRARY</span>
         </span>
     </nav>
 
@@ -29,11 +29,11 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p class="animated fadeIn">Enter your name :</p>
-                    <input type="text" id="modalnameInput" class="form-control mb-2 animated fadeIn" placeholder="Name">
+                    <p class="animated fadeIn">Siapa namamu ?</p>
+                    <input type="text" id="modalnameInput" class="form-control mb-2 animated fadeIn" placeholder="Nama">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary animated fadeIn" onclick="saveUserData()">Save</button>
+                    <button type="button" class="btn btn-primary animated fadeIn" onclick="saveUserData()"><i class="fas fa-save"></i> Save</button>
                 </div>
             </div>
         </div>
@@ -43,6 +43,7 @@
         <span class="animated fadeInLeft">Hello, <span id="userName"></span>!</span>
         <div id="clock" class="clock animated fadeInRight"></div>
     </div>
+    <button id="darkModeToggle">Dark Mode</button>
 
     <hr class="my-3 animated fadeIn">
 
@@ -51,6 +52,8 @@
     </div>
 
     <hr class="my-3 animated fadeIn">
+
+    <div class="backgroundOpacity">
 
     <div class="container mt-4 animated fadeIn">
         <div id="tableInfo"></div>
@@ -67,7 +70,7 @@
             <thead>
                 <tr>
                     <th>NIM</th>
-                    <th>Name</th>
+                    <th>Nama</th>
                     <th>Alamat</th>
                     <th>Pengaturan</th>
                 </tr>
@@ -76,26 +79,30 @@
             </tbody>
         </table>
 
+
         <hr class="animated fadeIn">
 
-        <h2>Add Data</h2>
+        <h4>Add Data</h4>
         <form id="addDataForm">
             <div class="form-group">
                 <label for="nimInput">NIM :</label>
                 <input type="text" class="form-control" id="nimInput" required placeholder="Nomor Induk Mahasiswa">
             </div>
             <div class="form-group">
-                <label for="nameInput">Name :</label>
+                <label for="nameInput">Nama :</label>
                 <input type="text" class="form-control" id="nameInput" required placeholder="Nama Lengkap">
             </div>
             <div class="form-group">
                 <label for="alamatInput">Alamat :</label>
                 <input type="text" class="form-control" id="alamatInput" required placeholder="Alamat Tempat Tinggal">
             </div>
-            <button type="submit" class="btn btn-primary">Add Data</button>
+            <button type="button" class="btn btn-secondary" id="resetForm"><i class="fas fa-undo"></i> Reset</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Data</button>
         </form>
     </div>
+</div>
 
+    <br>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -123,8 +130,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="editModalSave">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                    <button type="button" class="btn btn-primary" id="editModalSave"><i class="fas fa-save"></i> Save changes</button>
                 </div>
             </div>
         </div>
@@ -145,6 +152,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="script.js"></script>
 </body>
 
