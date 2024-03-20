@@ -57,7 +57,7 @@ function populateTable() {
       row.append($('<td>').text(item.nim));
       row.append($('<td>').text(item.name));
       row.append($('<td>').text(item.alamat));
-      row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn">Edit</button> <button class="btn btn-danger btn-sm delete-btn">Delete</button>'));
+      row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button> <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash-alt"></i> Delete</button>'));
       tableBody.append(row);
   }
 
@@ -87,6 +87,7 @@ $('#entriesPerPage').change(function () {
 
 populateTable();
 
+// Function to save data to localStorage
 function saveDataToLocalStorage() {
   localStorage.setItem('mahasiswaData', JSON.stringify(data));
 }
@@ -127,14 +128,6 @@ $(document).on('click', '.delete-btn', function() {
       showFeedback('Data berhasil dihapus.', 'warning');
   }
 });
-
-// Function to save data to localStorage
-function saveDataToLocalStorage() {
-  localStorage.setItem('mahasiswaData', JSON.stringify(data));
-}
-
-// Initial population of table
-populateTable();
 
 function showFeedback(message, type) {
   var alertClass = '';
@@ -198,6 +191,7 @@ function showFeedback(message, type) {
   // Update function
   function update() {
       currentChunk += 0.01;
+      var progPercent =      currentChunk += 0.01;
       var progPercent = 100 - (currentChunk * (100 / chunks));
       $(".progress-bar").css('width', progPercent + '%');
 
@@ -207,3 +201,4 @@ function showFeedback(message, type) {
       }
   }
 }
+
