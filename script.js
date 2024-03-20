@@ -51,13 +51,13 @@ function populateTable() {
   }
 
   for (var i = startIndex; i < endIndex; i++) {
-    var item = data[i];
-    var row = $('<tr>');
-    row.append($('<td>').text(item.nim));
-    row.append($('<td>').text(item.name));
-    row.append($('<td>').text(item.alamat));
-    row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn">Edit</button> <button class="btn btn-danger btn-sm delete-btn">Delete</button>'));
-    tableBody.append(row);
+      var item = data[i];
+      var row = $('<tr>');
+      row.append($('<td>').text(item.nim));
+      row.append($('<td>').text(item.name));
+      row.append($('<td>').text(item.alamat));
+      row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn">Edit</button> <button class="btn btn-danger btn-sm delete-btn">Delete</button>'));
+      tableBody.append(row);
   }
 
   var entryCountMessage = "Showing " + (startIndex + 1) + " to " + endIndex + " of " + data.length + " entries.";
@@ -86,6 +86,7 @@ $('#entriesPerPage').change(function () {
 
 populateTable();
 
+// Function to save data to localStorage
 function saveDataToLocalStorage() {
   localStorage.setItem('mahasiswaData', JSON.stringify(data));
 }
@@ -122,10 +123,12 @@ $(document).on('click', '.delete-btn', function () {
   }
 });
 
+// Function to save data to localStorage
 function saveDataToLocalStorage() {
   localStorage.setItem('mahasiswaData', JSON.stringify(data));
 }
 
+// Initial population of table
 populateTable();
 
 function showFeedback(message, type) {
@@ -183,9 +186,9 @@ function showFeedback(message, type) {
   });
 
   function update() {
-    currentChunk += 0.01;
-    var progPercent = 100 - (currentChunk * (100 / chunks));
-    $(".progress-bar").css('width', progPercent + '%');
+      currentChunk += 0.01;
+      var progPercent = 100 - (currentChunk * (100 / chunks));
+      $(".progress-bar").css('width', progPercent + '%');
 
     if (progPercent <= 0) {
       $(".alert").remove();
@@ -193,3 +196,4 @@ function showFeedback(message, type) {
     }
   }
 }
+
