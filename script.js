@@ -1,5 +1,5 @@
 var typed = new Typed('.auto-type', {
-  strings: ["You", "Ourselves", "😭😭😔😔", "Love", "Passion", "Happiness", "Yourself", "We", "Mankind"],
+  strings: ["senyumin aja", "gwenchana", "marah", "bahagia sekali", "lelah", "ya gitu", "sedih", "biasa aja", "apa ya"],
   typeSpeed: 150,
   backSpeed: 150,
   loop: true,
@@ -32,7 +32,6 @@ function padZero(num) {
 setInterval(updateClock, 1000);
 updateClock();
 
-// Load data from localStorage or use default data
 var data = JSON.parse(localStorage.getItem('mahasiswaData')) || [
   { nim: '00000092718', name: 'Ryann Chandiari', alamat: 'Makassar Pride' },
   { nim: 'Rine123', name: '123Sugar', alamat: 'Redoxon' }
@@ -48,17 +47,17 @@ function populateTable() {
   var startIndex = (currentPage - 1) * entriesPerPage;
   var endIndex = startIndex + entriesPerPage;
   if (endIndex > data.length) {
-      endIndex = data.length;
+    endIndex = data.length;
   }
 
   for (var i = startIndex; i < endIndex; i++) {
-      var item = data[i];
-      var row = $('<tr>');
-      row.append($('<td>').text(item.nim));
-      row.append($('<td>').text(item.name));
-      row.append($('<td>').text(item.alamat));
-      row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn">Edit</button> <button class="btn btn-danger btn-sm delete-btn">Delete</button>'));
-      tableBody.append(row);
+    var item = data[i];
+    var row = $('<tr>');
+    row.append($('<td>').text(item.nim));
+    row.append($('<td>').text(item.name));
+    row.append($('<td>').text(item.alamat));
+    row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn">Edit</button> <button class="btn btn-danger btn-sm delete-btn">Delete</button>'));
+    tableBody.append(row);
   }
 
   var entryCountMessage = "Showing " + (startIndex + 1) + " to " + endIndex + " of " + data.length + " entries.";
@@ -71,13 +70,13 @@ $('#addDataForm').submit(function (event) {
   var name = $('#nameInput').val();
   var alamat = $('#alamatInput').val();
   if (nim && name && alamat) {
-      data.push({ nim: nim, name: name, alamat: alamat });
-      saveDataToLocalStorage();
-      populateTable();
-      $('#nimInput, #nameInput, #alamatInput').val('');
-      showFeedback('Data berhasil ditambahkan.', 'success');
+    data.push({ nim: nim, name: name, alamat: alamat });
+    saveDataToLocalStorage();
+    populateTable();
+    $('#nimInput, #nameInput, #alamatInput').val('');
+    showFeedback('Data berhasil ditambahkan.', 'success');
   } else {
-      showFeedback('Gagal menambahkan data. Pastikan semua kolom terisi.', 'danger');
+    showFeedback('Gagal menambahkan data. Pastikan semua kolom terisi.', 'danger');
   }
 });
 
@@ -91,71 +90,63 @@ function saveDataToLocalStorage() {
   localStorage.setItem('mahasiswaData', JSON.stringify(data));
 }
 
-// Function to handle edit button click
-$(document).on('click', '.edit-btn', function() {
+$(document).on('click', '.edit-btn', function () {
   var index = $(this).closest('tr').index();
   var item = data[index];
 
-  // Populate modal with current data
-  $('#editNIMInput').val(item.nim).prop('disabled', true); // Disable editing of NIM
+  $('#editNIMInput').val(item.nim).prop('disabled', true); 
   $('#editNameInput').val(item.name);
   $('#editAlamatInput').val(item.alamat);
 
-  // Show modal
   $('#editModal').modal('show');
 
-  // Save changes when modal save button is clicked
-  $('#editModalSave').off('click').on('click', function() {
-      var newName = $('#editNameInput').val();
-      var newAlamat = $('#editAlamatInput').val();
-      data[index].name = newName;
-      data[index].alamat = newAlamat;
-      saveDataToLocalStorage();
-      populateTable();
-      $('#editModal').modal('hide');
-      showFeedback('Data berhasil diubah.', 'info');
+  $('#editModalSave').off('click').on('click', function () {
+    var newName = $('#editNameInput').val();
+    var newAlamat = $('#editAlamatInput').val();
+    data[index].name = newName;
+    data[index].alamat = newAlamat;
+    saveDataToLocalStorage();
+    populateTable();
+    $('#editModal').modal('hide');
+    showFeedback('Data berhasil diubah.', 'info');
   });
 });
 
-// Function to handle delete button click
-$(document).on('click', '.delete-btn', function() {
+$(document).on('click', '.delete-btn', function () {
   var index = $(this).closest('tr').index();
   if (confirm('Are you sure you want to delete this entry?')) {
-      data.splice(index, 1);
-      saveDataToLocalStorage();
-      populateTable();
-      showFeedback('Data berhasil dihapus.', 'warning');
+    data.splice(index, 1);
+    saveDataToLocalStorage();
+    populateTable();
+    showFeedback('Data berhasil dihapus.', 'warning');
   }
 });
 
-// Function to save data to localStorage
 function saveDataToLocalStorage() {
   localStorage.setItem('mahasiswaData', JSON.stringify(data));
 }
 
-// Initial population of table
 populateTable();
 
 function showFeedback(message, type) {
   var alertClass = '';
   switch (type) {
-      case 'success':
-          alertClass = 'alert-success';
-          break;
-      case 'info':
-          alertClass = 'alert-info';
-          break;
-      case 'warning':
-          alertClass = 'alert-warning';
-          break;
-      case 'danger':
-          alertClass = 'alert-danger';
-          break;
-      default:
-          alertClass = 'alert-info';
+    case 'success':
+      alertClass = 'alert-success';
+      break;
+    case 'info':
+      alertClass = 'alert-info';
+      break;
+    case 'warning':
+      alertClass = 'alert-warning';
+      break;
+    case 'danger':
+      alertClass = 'alert-danger';
+      break;
+    default:
+      alertClass = 'alert-info';
   }
 
-  // Create alert element
   var alertHTML = `
   <div class="alert ${alertClass} alert-dismissible fade show" role="alert" style="cursor:pointer;opacity:.85;position:fixed;top:20px;right:20px;z-index:9999;">
     <strong>${type.charAt(0).toUpperCase() + type.slice(1)}!</strong> ${message}
@@ -168,42 +159,37 @@ function showFeedback(message, type) {
   </div>
 `;
 
-  // Append alert to body
   $('body').append(alertHTML);
 
-  // Initialize feedback timer
   var currentChunk = 0;
   var chunks = 5;
-  var timer = setInterval(function() {
-      update();
+  var timer = setInterval(function () {
+    update();
   }, 10);
 
-  // Hover event handler
-  $('.alert').hover(function() {
-      window.clearInterval(timer);
-      $(".alert").css('opacity', 1);
-  }, function() {
-      $(".alert").css('opacity', .9);
-      timer = setInterval(function() {
-          update();
-      }, 10);
+  $('.alert').hover(function () {
+    window.clearInterval(timer);
+    $(".alert").css('opacity', 1);
+  }, function () {
+    $(".alert").css('opacity', .9);
+    timer = setInterval(function () {
+      update();
+    }, 10);
   });
 
-  // Click event handler
-  $('.alert').click(function() {
-      $(".alert").alert('close');
-      clearInterval(timer);
+  $('.alert').click(function () {
+    $(".alert").alert('close');
+    clearInterval(timer);
   });
 
-  // Update function
   function update() {
-      currentChunk += 0.01;
-      var progPercent = 100 - (currentChunk * (100 / chunks));
-      $(".progress-bar").css('width', progPercent + '%');
+    currentChunk += 0.01;
+    var progPercent = 100 - (currentChunk * (100 / chunks));
+    $(".progress-bar").css('width', progPercent + '%');
 
-      if (progPercent <= 0) {
-          $(".alert").remove();
-          clearInterval(timer);
-      }
+    if (progPercent <= 0) {
+      $(".alert").remove();
+      clearInterval(timer);
+    }
   }
 }
