@@ -1,3 +1,23 @@
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* CSS function to add a background image */
+.background-image {
+  /* Specify the URL of the image */
+  background-image: url('ocen.jpg');
+
+  /* Set background size and position */
+  background-size: cover; /* Cover the entire element */
+  background-position: center; /* Center the image horizontally and vertically */
+
+  /* Other background properties */
+  background-repeat: no-repeat; /* Do not repeat the image */
+}
+
+
 .navbar {
   background-color: #322e30;
 }
@@ -50,7 +70,7 @@ hr.my-3 {
 }
 
 .auto-type {
-  color: red;
+  color: coral;
   font-size: 18px;
   font-weight: bold;
 }
@@ -110,12 +130,12 @@ hr.my-3 {
 
 /* Dark mode styles */
 .dark-mode {
-  background-color: #000000; /* Black background color for the entire page */
+  background-color: #1a1a1a; /* Dark gray background color for the entire page */
   color: #ffffff; /* Light text color for the entire page */
 }
 
 .dark-mode .navbar {
-  background-color: #1a1a1a; /* Dark background color for the navbar */
+  background-color: #333333; /* Slightly lighter background color for the navbar */
 }
 
 .dark-mode .navbar-brand {
@@ -130,17 +150,174 @@ hr.my-3 {
   color: #ffffff; /* Light text color for quotes */
 }
 
-/* Keep the table white */
+/* Keep the table slightly lighter */
 .table {
   background-color: #ffffff; /* White background color for the table */
   padding: 15px; /* Add padding to the table */
 }
 
 .dark-mode .table th {
-  background-color: #292929; /* Dark background color for table headers */
+  background-color: #444444; /* Slightly lighter background color for table headers */
   color: #ffffff; /* Light text color for table headers */
 }
 
 .dark-mode .table tbody tr:hover {
-  background-color: #333333; 
+  background-color: #555555; /* Slightly lighter background color for table rows on hover */
+}
+
+/* Dark mode styles for modal */
+.dark-mode .modal-content {
+  background-color: #292929; /* Dark background color for modal content */
+  color: #ffffff; /* Light text color for modal content */
+}
+
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+  background-color: #1a1a1a; /* Dark background color for modal header and footer */
+  color: #ffffff; /* Light text color for modal header and footer */
+}
+
+.dark-mode .modal-body {
+  background-color: #333333; /* Dark background color for modal body */
+  color: #ffffff; /* Light text color for modal body */
+}
+
+
+#darkModeToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#darkModeToggle:hover {
+  background-color: #555;
+}
+
+.dark-mode #darkModeToggle {
+  background-color: #fff;
+  color: #333;
+}
+
+.dark-mode #darkModeToggle:hover {
+  background-color: #ddd;
+}
+
+#paginationButtons {
+  margin-top: 10px;
+}
+
+#paginationButtons button {
+  margin: 0 5px;
+}
+
+.page-btn {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff; /* Add border */
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.page-btn:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#prevPageBtn,
+#nextPageBtn {
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff; /* Add border */
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#prevPageBtn:hover,
+#nextPageBtn:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Default styles for all screens */
+/* Add your default styles here */
+
+/* Tablet styles */
+@media screen and (max-width: 768px) {
+  /* Adjust layout and styles for tablets */
+  .container {
+      padding: 20px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Smartphone styles */
+@media screen and (max-width: 576px) {
+  /* Adjust layout and styles for smartphones */
+  .container {
+      padding: 10px; /* Further reduce padding for smaller screens */
+  }
+  .navbar-brand {
+      font-size: 18px; /* Decrease font size for the navbar brand */
+  }
+}
+
+/* New color scheme */
+body {
+  background-color: #f4f4f4; /* Light gray background */
+  color: #333333; /* Dark gray text color */
+}
+
+.navbar {
+  background-color: #1e90ff; /* Dodger blue navbar background */
+}
+
+.navbar-brand {
+  color: #ffffff; /* White text color for the navbar brand */
+}
+
+.greetings span {
+  color: #333333; /* Dark gray text color for greetings */
+}
+
+.quotes h5 {
+  color: #333333; /* Dark gray text color for quotes */
+}
+
+.table {
+  background-color: #ffffff; /* White background color for the table */
+  color: #333333; /* Dark gray text color for the table */
+}
+
+.table th {
+  background-color: #1e90ff; /* Dodger blue background color for table headers */
+  color: #ffffff; /* White text color for table headers */
+}
+
+.table tbody tr:hover {
+  background-color: #f0f8ff; /* Light blue background color for table rows on hover */
+}
+
+/* CSS to position particles as background */
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure particles are behind other content */
+}
+
+/* Your existing CSS styles */
+
+.dark-mode #particles-js {
+  background-color: rgba(91, 91, 91, 0.5); /* Adjust opacity as needed */
 }

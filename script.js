@@ -245,31 +245,213 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 });
-
-// Dark mode toggle functionality
-document.getElementById('darkModeToggle').addEventListener('click', function() {
-  // Toggle dark mode class on the body
-  document.body.classList.toggle('dark-mode');
-
-  // Save dark mode preference to localStorage
-  var darkModeEnabled = document.body.classList.contains('dark-mode');
+// Function to toggle dark mode
+function toggleDarkMode() {
+  var darkModeEnabled = document.body.classList.toggle('dark-mode');
   localStorage.setItem('darkMode', darkModeEnabled);
+}
+
+// Event listener for dark mode toggle button
+document.getElementById('darkModeToggle').addEventListener('click', function() {
+  toggleDarkMode();
 });
 
 // Check if dark mode preference is saved in localStorage
 var darkModeEnabled = localStorage.getItem('darkMode');
 
 // If dark mode preference exists, apply it
-if (darkModeEnabled) {
+if (darkModeEnabled && darkModeEnabled === 'true') {
   document.body.classList.add('dark-mode');
+} else {
+  document.body.classList.remove('dark-mode'); // Ensure light mode is applied if preference is not set or set to 'false'
 }
 
-$(".inner-switch").on("click", function() {
-  if ($("body").hasClass("dark")) {
-    $("body").removeClass("dark");
-    $(".inner-switch").text("OFF");
-  } else {
-    $("body").addClass("dark");
-    $(".inner-switch").text("ON");
-  }
+
+var currentPage = 1;
+var entriesPerPage = parseInt($('#entriesPerPage').val());
+
+// Function to update pagination information
+function updatePaginationInfo() {
+    var totalPages = Math.ceil(data.length / entriesPerPage);
+    $('#currentPage').text(currentPage);
+    $('#totalPages').text(totalPages);
+}
+
+// Function to generate page number buttons
+function generatePageNumbers() {
+    var totalPages = Math.ceil(data.length / entriesPerPage);
+    var pageNumbers = '';
+
+    for (var i = 1; i <= totalPages; i++) {
+        pageNumbers += `<button class="btn btn-secondary page-btn">${i}</button>`;
+    }
+
+    $('#pageNumbers').html(pageNumbers);
+
+    $('.page-btn').click(function () {
+        currentPage = parseInt($(this).text());
+        updateTable();
+    });
+}
+
+// Function to update table content based on current page
+function updateTable() {
+    var startIndex = (currentPage - 1) * entriesPerPage;
+    var endIndex = startIndex + entriesPerPage;
+    if (endIndex > data.length) {
+        endIndex = data.length;
+    }
+
+    var tableBody = $('#dataTableBody');
+    tableBody.empty();
+
+    for (var i = startIndex; i < endIndex; i++) {
+        var item = data[i];
+        var row = $('<tr>');
+        row.append($('<td>').text(item.nim));
+        row.append($('<td>').text(item.name));
+        row.append($('<td>').text(item.alamat));
+        row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button> <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>'));
+        tableBody.append(row);
+    }
+
+    var entryCountMessage = "Showing " + (startIndex + 1) + " to " + endIndex + " of " + data.length + " entries.";
+    $('#tableInfo').text(entryCountMessage);
+
+    updatePaginationInfo();
+    generatePageNumbers();
+}
+
+// Event handler for changing the number of entries per page
+$('#entriesPerPage').change(function () {
+    currentPage = 1; // Reset current page to 1 when changing entries per page
+    entriesPerPage = parseInt($(this).val());
+    updateTable();
 });
+
+// Event handler for "Next" button
+$('#nextPageBtn').click(function () {
+    var totalPages = Math.ceil(data.length / entriesPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        updateTable();
+    }
+});
+
+// Event handler for "Previous" button
+$('#prevPageBtn').click(function () {
+    if (currentPage > 1) {
+        currentPage--;
+        updateTable();
+    }
+});
+
+// Initial table population
+updateTable();
+
+particlesJS("particles-js", {
+  "particles": {
+    "number": {
+      "value": 80,
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      }
+    },
+    "opacity": {
+      "value": 0.5,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 3,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 6,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": true,
+        "mode": "repulse"
+      },
+      "onclick": {
+        "enable": true,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+});
+
