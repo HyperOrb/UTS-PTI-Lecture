@@ -306,7 +306,7 @@ body {
   background-color: #f0f8ff; /* Light blue background color for table rows on hover */
 }
 
-/* CSS to position particles as background */
+
 #particles-js {
   position: fixed;
   top: 0;
@@ -316,8 +316,23 @@ body {
   z-index: -1; /* Ensure particles are behind other content */
 }
 
+#particles-js2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Place particles 1 level further back */
+}
+
+.table-container {
+  position: relative;
+  z-index: 1; /* Ensure the table is above the particles */
+}
+
 /* Your existing CSS styles */
 
 .dark-mode #particles-js {
-  background-color: rgba(29, 28, 28, 0.5); /* Adjust opacity as needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
 }
+
