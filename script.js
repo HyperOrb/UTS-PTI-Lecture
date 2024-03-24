@@ -43,121 +43,32 @@ var data = JSON.parse(localStorage.getItem('mahasiswaData')) || [
   { nim: '00000092385', name: 'yes yes okay', alamat: 'hiyaa' },
 ];
 
-// Modify the populateTable function to bind event handlers directly
 function populateTable() {
   var tableBody = $('#dataTableBody');
   tableBody.empty();
 
   var entriesPerPage = parseInt($('#entriesPerPage').val());
+  var currentPage = 1;
+
   var startIndex = (currentPage - 1) * entriesPerPage;
-  var endIndex = Math.min(startIndex + entriesPerPage, data.length);
+  var endIndex = startIndex + entriesPerPage;
+  if (endIndex > data.length) {
+    endIndex = data.length;
+  }
 
   for (var i = startIndex; i < endIndex; i++) {
-      var item = data[i];
-      var row = $('<tr>');
-      row.append($('<td>').text(item.nim));
-      row.append($('<td>').text(item.name));
-      row.append($('<td>').text(item.alamat));
-      row.append(generateButtons(item)); // Generate buttons for the row
-      tableBody.append(row);
+    var item = data[i];
+    var row = $('<tr>');
+    row.append($('<td>').text(item.nim));
+    row.append($('<td>').text(item.name));
+    row.append($('<td>').text(item.alamat));
+    row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button> <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>'));
+    tableBody.append(row);
   }
 
   var entryCountMessage = "Showing " + (startIndex + 1) + " to " + endIndex + " of " + data.length + " entries.";
   $('#tableInfo').text(entryCountMessage);
-
-  updatePaginationInfo();
-  generatePageNumbers();
 }
-
-function generateButtons(item) {
-  var buttonsCell = $('<td>');
-  var editButton = $('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button>');
-  var deleteButton = $('<button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>');
-  
-  editButton.click(function () {
-      var nim = $(this).closest('tr').find('td:eq(0)').text();
-      var item = data.find(entry => entry.nim === nim);
-
-      $('#editNIMInput').val(item.nim).prop('disabled', true);
-      $('#editNameInput').val(item.name);
-      $('#editAlamatInput').val(item.alamat);
-
-      $('#editModal').modal('show');
-
-      $('#editModalSave').off('click').on('click', function () {
-          var newName = $('#editNameInput').val();
-          var newAlamat = $('#editAlamatInput').val();
-          item.name = newName;
-          item.alamat = newAlamat;
-          saveDataToLocalStorage();
-          updateTable();
-          $('#editModal').modal('hide');
-          showFeedback('Data berhasil diubah.', 'info');
-      });
-  });
-
-  deleteButton.click(function () {
-      var nim = $(this).closest('tr').find('td:eq(0)').text();
-      var index = data.findIndex(entry => entry.nim === nim);
-      if (confirm('Apakah yakin ingin menghapus?')) {
-          data.splice(index, 1);
-          saveDataToLocalStorage();
-          updateTable();
-          showFeedback('Data berhasil dihapus.', 'deleted');
-      }
-  });
-
-  buttonsCell.append(editButton);
-  buttonsCell.append(deleteButton);
-  return buttonsCell;
-} 
-
-
-
-
-// Define event handler functions for edit and delete buttons
-// Update the editButtonClickHandler function
-// Update the editButtonClickHandler function
-function editButtonClickHandler() {
-  var nim = $(this).closest('tr').find('td:eq(0)').text(); // Get the nim from the clicked row
-  var item = data.find(entry => entry.nim === nim); // Find the corresponding item in the data array
-
-  // Populate edit modal fields with data
-  $('#editNIMInput').val(item.nim).prop('disabled', true);
-  $('#editNameInput').val(item.name);
-  $('#editAlamatInput').val(item.alamat);
-
-  $('#editModal').modal('show');
-
-  $('#editModalSave').off('click').on('click', function () {
-      var newName = $('#editNameInput').val();
-      var newAlamat = $('#editAlamatInput').val();
-      // Update the correct entry in the data array
-      item.name = newName;
-      item.alamat = newAlamat;
-      saveDataToLocalStorage();
-      // Repopulate the table based on the current page and sorting order
-      updateTable();
-      $('#editModal').modal('hide');
-      showFeedback('Data berhasil diubah.', 'info');
-  });
-}
-
-// Update the deleteButtonClickHandler function
-function deleteButtonClickHandler() {
-  var nim = $(this).closest('tr').find('td:eq(0)').text(); // Get the nim from the clicked row
-  var index = data.findIndex(entry => entry.nim === nim); // Find the index of the corresponding item in the data array
-  if (confirm('Apakah yakin ingin menghapus?')) {
-      data.splice(index, 1);
-      saveDataToLocalStorage();
-      updateTable();
-      showFeedback('Data berhasil dihapus.', 'deleted');
-  }
-}
-
-
-
-
 
 $('#addDataForm').submit(function (event) {
   event.preventDefault();
@@ -213,9 +124,7 @@ function saveDataToLocalStorage() {
 }
 
 $(document).on('click', '.edit-btn', function () {
-  var indexOnPage = $(this).closest('tr').index();
-  var startIndex = (currentPage - 1) * entriesPerPage;
-  var index = startIndex + indexOnPage;
+  var index = $(this).closest('tr').index();
   var item = data[index];
 
   $('#editNIMInput').val(item.nim).prop('disabled', true);
@@ -225,31 +134,26 @@ $(document).on('click', '.edit-btn', function () {
   $('#editModal').modal('show');
 
   $('#editModalSave').off('click').on('click', function () {
-      var newName = $('#editNameInput').val();
-      var newAlamat = $('#editAlamatInput').val();
-      // Update the correct entry in the data array
-      data[index].name = newName;
-      data[index].alamat = newAlamat;
-      saveDataToLocalStorage();
-      // Repopulate the table based on the current page and sorting order
-      updateTable();
-      $('#editModal').modal('hide');
-      showFeedback('Data berhasil diubah.', 'info');
+    var newName = $('#editNameInput').val();
+    var newAlamat = $('#editAlamatInput').val();
+    data[index].name = newName;
+    data[index].alamat = newAlamat;
+    saveDataToLocalStorage();
+    populateTable();
+    $('#editModal').modal('hide');
+    showFeedback('Data berhasil diubah.', 'info');
   });
 });
 
 $(document).on('click', '.delete-btn', function () {
-  var indexOnPage = $(this).closest('tr').index();
-  var startIndex = (currentPage - 1) * entriesPerPage;
-  var index = startIndex + indexOnPage;
-  if (confirm('Apakah yakin ingin menghapus?')) {
-      data.splice(index, 1);
-      saveDataToLocalStorage();
-      updateTable();
-      showFeedback('Data berhasil dihapus.', 'deleted');
+  var index = $(this).closest('tr').index();
+  if (confirm('Apakah yakin ingin mengubah ?')) {
+    data.splice(index, 1);
+    saveDataToLocalStorage();
+    populateTable();
+    showFeedback('Data berhasil dihapus.', 'deleted');
   }
 });
-
 
 function showFeedback(message, type) {
   var alertClass = '';
@@ -328,31 +232,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function sortTable(columnIndex) {
-    var table = document.querySelector('.table');
-    var tbody = table.querySelector('tbody');
-    var rows = Array.from(tbody.querySelectorAll('tr'));
+      var rows = Array.from(table.querySelectorAll('tbody tr'));
 
-    rows.sort(function (rowA, rowB) {
-        var cellA = rowA.cells[columnIndex].textContent.trim();
-        var cellB = rowB.cells[columnIndex].textContent.trim();
+      rows.sort(function (rowA, rowB) {
+          var cellA = rowA.cells[columnIndex].textContent.trim();
+          var cellB = rowB.cells[columnIndex].textContent.trim();
 
-        if (columnIndex === 0 || columnIndex === 2) {
-            return cellA.localeCompare(cellB);
-        } else {
-            return parseFloat(cellA) - parseFloat(cellB);
-        }
-    });
+          if (columnIndex === 0 || columnIndex === 2) {
+              return cellA.localeCompare(cellB);
+          } else {
+              return cellA.localeCompare(cellB, undefined, { numeric: true });
+          }
+      });
 
-    // Remove existing rows from the table
-    tbody.innerHTML = '';
-
-    // Re-append sorted rows to the table
-    rows.forEach(function (row) {
-        tbody.appendChild(row);
-    });
-}
-
-
+      var tbody = table.querySelector('tbody');
+      rows.forEach(function (row) {
+          tbody.appendChild(row);
+      });
+  }
 });
 // Function to toggle dark mode
 function toggleDarkMode() {
