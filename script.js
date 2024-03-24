@@ -34,7 +34,13 @@ updateClock();
 
 var data = JSON.parse(localStorage.getItem('mahasiswaData')) || [
   { nim: '00000092718', name: 'Ryann Chandiari', alamat: 'Makassar Pride' },
-  { nim: 'Rine123', name: '123Sugar', alamat: 'Redoxon' }
+  { nim: '00000093142', name: 'Audrey Christabelle H', alamat: 'Jakarta' },
+  { nim: '00000093438', name: 'Devin Wongosari', alamat: 'Dormitory UMN' },
+  { nim: '00000092385', name: 'Fellisca Veren', alamat: 'BSD' },
+  { nim: '0988888888', name: 'Test', alamat: 'Taman Permata' },
+  { nim: '0929299929', name: 'Apa ya', alamat: 'Yey' },
+  { nim: '00999999982', name: 'Semoga bagus', alamat: ':))' },
+  { nim: '00000092385', name: 'yes yes okay', alamat: 'hiyaa' },
 ];
 
 function populateTable() {
