@@ -4,16 +4,10 @@ body {
   font-style: normal;
 }
 
-/* CSS function to add a background image */
 .background-image {
-  /* Specify the URL of the image */
   background-image: url('ocen.jpg');
-
-  /* Set background size and position */
-  background-size: cover; /* Cover the entire element */
-  background-position: center; /* Center the image horizontally and vertically */
-
-  /* Other background properties */
+  background-size: cover; 
+  background-position: center; 
   background-repeat: no-repeat; /* Do not repeat the image */
 }
 
