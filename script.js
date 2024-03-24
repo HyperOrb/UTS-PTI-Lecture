@@ -86,7 +86,7 @@ $('#addDataForm').submit(function (event) {
   }
 });
 
-$('#addDataFormSubmitBtn').click(function(event) {
+$('#addDataFormSubmitBtn').click(function (event) {
   event.preventDefault();
   var nim = $('#nimInput').val();
   var name = $('#nameInput').val();
@@ -223,8 +223,8 @@ function showFeedback(message, type) {
 
 document.querySelectorAll('.sortable').forEach(header => {
   header.addEventListener('click', () => {
-      const columnIndex = Array.from(header.parentNode.children).indexOf(header);
-      sortTable(columnIndex);
+    const columnIndex = Array.from(header.parentNode.children).indexOf(header);
+    sortTable(columnIndex);
   });
 });
 function toggleDarkMode() {
@@ -232,7 +232,7 @@ function toggleDarkMode() {
   localStorage.setItem('darkMode', darkModeEnabled);
 }
 
-document.getElementById('darkModeToggle').addEventListener('click', function() {
+document.getElementById('darkModeToggle').addEventListener('click', function () {
   toggleDarkMode();
 });
 
@@ -241,7 +241,7 @@ var darkModeEnabled = localStorage.getItem('darkMode');
 if (darkModeEnabled && darkModeEnabled === 'true') {
   document.body.classList.add('dark-mode');
 } else {
-  document.body.classList.remove('dark-mode'); 
+  document.body.classList.remove('dark-mode');
 }
 
 
@@ -249,73 +249,73 @@ var currentPage = 1;
 var entriesPerPage = parseInt($('#entriesPerPage').val());
 
 function updatePaginationInfo() {
-    var totalPages = Math.ceil(data.length / entriesPerPage);
-    $('#currentPage').text(currentPage);
-    $('#totalPages').text(totalPages);
+  var totalPages = Math.ceil(data.length / entriesPerPage);
+  $('#currentPage').text(currentPage);
+  $('#totalPages').text(totalPages);
 }
 
 function generatePageNumbers() {
-    var totalPages = Math.ceil(data.length / entriesPerPage);
-    var pageNumbers = '';
+  var totalPages = Math.ceil(data.length / entriesPerPage);
+  var pageNumbers = '';
 
-    for (var i = 1; i <= totalPages; i++) {
-        pageNumbers += `<button class="btn btn-secondary page-btn">${i}</button>`;
-    }
+  for (var i = 1; i <= totalPages; i++) {
+    pageNumbers += `<button class="btn btn-secondary page-btn">${i}</button>`;
+  }
 
-    $('#pageNumbers').html(pageNumbers);
+  $('#pageNumbers').html(pageNumbers);
 
-    $('.page-btn').click(function () {
-        currentPage = parseInt($(this).text());
-        updateTable();
-    });
+  $('.page-btn').click(function () {
+    currentPage = parseInt($(this).text());
+    updateTable();
+  });
 }
 
 function updateTable() {
-    var startIndex = (currentPage - 1) * entriesPerPage;
-    var endIndex = startIndex + entriesPerPage;
-    if (endIndex > data.length) {
-        endIndex = data.length;
-    }
+  var startIndex = (currentPage - 1) * entriesPerPage;
+  var endIndex = startIndex + entriesPerPage;
+  if (endIndex > data.length) {
+    endIndex = data.length;
+  }
 
-    var tableBody = $('#dataTableBody');
-    tableBody.empty();
+  var tableBody = $('#dataTableBody');
+  tableBody.empty();
 
-    for (var i = startIndex; i < endIndex; i++) {
-        var item = data[i];
-        var row = $('<tr>');
-        row.append($('<td>').text(item.nim));
-        row.append($('<td>').text(item.name));
-        row.append($('<td>').text(item.alamat));
-        row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button> <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>'));
-        tableBody.append(row);
-    }
+  for (var i = startIndex; i < endIndex; i++) {
+    var item = data[i];
+    var row = $('<tr>');
+    row.append($('<td>').text(item.nim));
+    row.append($('<td>').text(item.name));
+    row.append($('<td>').text(item.alamat));
+    row.append($('<td>').html('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button> <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>'));
+    tableBody.append(row);
+  }
 
-    var entryCountMessage = "Showing " + (startIndex + 1) + " to " + endIndex + " of " + data.length + " entries.";
-    $('#tableInfo').text(entryCountMessage);
+  var entryCountMessage = "Showing " + (startIndex + 1) + " to " + endIndex + " of " + data.length + " entries.";
+  $('#tableInfo').text(entryCountMessage);
 
-    updatePaginationInfo();
-    generatePageNumbers();
+  updatePaginationInfo();
+  generatePageNumbers();
 }
 
 $('#entriesPerPage').change(function () {
-    currentPage = 1; 
-    entriesPerPage = parseInt($(this).val());
-    updateTable();
+  currentPage = 1;
+  entriesPerPage = parseInt($(this).val());
+  updateTable();
 });
 
 $('#nextPageBtn').click(function () {
-    var totalPages = Math.ceil(data.length / entriesPerPage);
-    if (currentPage < totalPages) {
-        currentPage++;
-        updateTable();
-    }
+  var totalPages = Math.ceil(data.length / entriesPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    updateTable();
+  }
 });
 
 $('#prevPageBtn').click(function () {
-    if (currentPage > 1) {
-        currentPage--;
-        updateTable();
-    }
+  if (currentPage > 1) {
+    currentPage--;
+    updateTable();
+  }
 });
 
 updateTable();
@@ -436,7 +436,7 @@ particlesJS("particles-js2", {
       }
     },
     "color": {
-      "value": "#000000" 
+      "value": "#000000"
     },
     "shape": {
       "type": "circle",
@@ -476,7 +476,7 @@ particlesJS("particles-js2", {
     "line_linked": {
       "enable": true,
       "distance": 150,
-      "color": "#000000", 
+      "color": "#000000",
       "opacity": 0.4,
       "width": 1
     },
