@@ -8,7 +8,7 @@ body {
   background-image: url('ocen.jpg');
   background-size: cover; 
   background-position: center; 
-  background-repeat: no-repeat; /* Do not repeat the image */
+  background-repeat: no-repeat;
 }
 
 
@@ -122,60 +122,56 @@ hr.my-3 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* Dark mode styles */
 .dark-mode {
-  background-color: #1a1a1a; /* Dark gray background color for the entire page */
-  color: #ffffff; /* Light text color for the entire page */
+  background-color: #1a1a1a; 
+  color: #ffffff; 
 }
 
 .dark-mode .navbar {
-  background-color: #333333; /* Slightly lighter background color for the navbar */
+  background-color: #333333; 
 }
 
 .dark-mode .navbar-brand {
-  color: #ffffff; /* Light text color for the navbar brand */
+  color: #ffffff; 
 }
 
 .dark-mode .greetings span {
-  color: #ffffff; /* Light text color for greetings */
+  color: #ffffff; 
 }
 
 .dark-mode .quotes h5 {
-  color: #ffffff; /* Light text color for quotes */
+  color: #ffffff; 
 }
 
-/* Keep the table slightly lighter */
 .table {
-  background-color: #ffffff; /* White background color for the table */
-  padding: 15px; /* Add padding to the table */
+  background-color: #ffffff; 
+  padding: 15px; 
 }
 
 .dark-mode .table th {
-  background-color: #444444; /* Slightly lighter background color for table headers */
-  color: #ffffff; /* Light text color for table headers */
+  background-color: #444444; 
+  color: #ffffff; 
 }
 
 .dark-mode .table tbody tr:hover {
-  background-color: #555555; /* Slightly lighter background color for table rows on hover */
+  background-color: #555555; 
 }
 
-/* Dark mode styles for modal */
 .dark-mode .modal-content {
-  background-color: #292929; /* Dark background color for modal content */
-  color: #ffffff; /* Light text color for modal content */
+  background-color: #292929; 
+  color: #ffffff; 
 }
 
 .dark-mode .modal-header,
 .dark-mode .modal-footer {
-  background-color: #1a1a1a; /* Dark background color for modal header and footer */
-  color: #ffffff; /* Light text color for modal header and footer */
+  background-color: #1a1a1a; 
+  color: #ffffff; 
 }
 
 .dark-mode .modal-body {
-  background-color: #333333; /* Dark background color for modal body */
-  color: #ffffff; /* Light text color for modal body */
+  background-color: #333333; 
+  color: #ffffff; 
 }
-
 
 #darkModeToggle {
   position: fixed;
@@ -215,7 +211,7 @@ hr.my-3 {
 .page-btn {
   background-color: transparent;
   color: #007bff;
-  border: 1px solid #007bff; /* Add border */
+  border: 1px solid #007bff; 
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
@@ -230,7 +226,7 @@ hr.my-3 {
 #nextPageBtn {
   background-color: transparent;
   color: #007bff;
-  border: 1px solid #007bff; /* Add border */
+  border: 1px solid #007bff; 
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
@@ -242,64 +238,55 @@ hr.my-3 {
   color: #fff;
 }
 
-/* Default styles for all screens */
-/* Add your default styles here */
-
-/* Tablet styles */
 @media screen and (max-width: 768px) {
-  /* Adjust layout and styles for tablets */
   .container {
-      padding: 20px; /* Adjust padding for smaller screens */
+      padding: 20px; 
   }
 }
 
-/* Smartphone styles */
 @media screen and (max-width: 576px) {
-  /* Adjust layout and styles for smartphones */
   .container {
-      padding: 10px; /* Further reduce padding for smaller screens */
+      padding: 10px; 
   }
   .navbar-brand {
-      font-size: 18px; /* Decrease font size for the navbar brand */
+      font-size: 18px; 
   }
 }
 
-/* New color scheme */
 body {
-  background-color: #f4f4f4; /* Light gray background */
-  color: #333333; /* Dark gray text color */
+  background-color: #f4f4f4; 
+  color: #333333; 
 }
 
 .navbar {
-  background-color: #1e90ff; /* Dodger blue navbar background */
+  background-color: #1e90ff; 
 }
 
 .navbar-brand {
-  color: #ffffff; /* White text color for the navbar brand */
+  color: #ffffff; 
 }
 
 .greetings span {
-  color: #333333; /* Dark gray text color for greetings */
+  color: #333333; 
 }
 
 .quotes h5 {
-  color: #333333; /* Dark gray text color for quotes */
+  color: #333333; 
 }
 
 .table {
-  background-color: #ffffff; /* White background color for the table */
-  color: #333333; /* Dark gray text color for the table */
+  background-color: #ffffff; 
+  color: #333333; 
 }
 
 .table th {
-  background-color: #1e90ff; /* Dodger blue background color for table headers */
-  color: #ffffff; /* White text color for table headers */
+  background-color: #1e90ff; 
+  color: #ffffff; 
 }
 
 .table tbody tr:hover {
-  background-color: #f0f8ff; /* Light blue background color for table rows on hover */
+  background-color: #f0f8ff; 
 }
-
 
 #particles-js {
   position: fixed;
@@ -307,7 +294,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Ensure particles are behind other content */
+  z-index: -1; 
 }
 
 #particles-js2 {
@@ -316,17 +303,15 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -2; /* Place particles 1 level further back */
+  z-index: -2; 
 }
 
 .table-container {
   position: relative;
-  z-index: 1; /* Ensure the table is above the particles */
+  z-index: 1; 
 }
 
-/* Your existing CSS styles */
-
 .dark-mode #particles-js {
-  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
