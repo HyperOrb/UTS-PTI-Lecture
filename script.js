@@ -251,39 +251,33 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 });
-// Function to toggle dark mode
 function toggleDarkMode() {
   var darkModeEnabled = document.body.classList.toggle('dark-mode');
   localStorage.setItem('darkMode', darkModeEnabled);
 }
 
-// Event listener for dark mode toggle button
 document.getElementById('darkModeToggle').addEventListener('click', function() {
   toggleDarkMode();
 });
 
-// Check if dark mode preference is saved in localStorage
 var darkModeEnabled = localStorage.getItem('darkMode');
 
-// If dark mode preference exists, apply it
 if (darkModeEnabled && darkModeEnabled === 'true') {
   document.body.classList.add('dark-mode');
 } else {
-  document.body.classList.remove('dark-mode'); // Ensure light mode is applied if preference is not set or set to 'false'
+  document.body.classList.remove('dark-mode'); 
 }
 
 
 var currentPage = 1;
 var entriesPerPage = parseInt($('#entriesPerPage').val());
 
-// Function to update pagination information
 function updatePaginationInfo() {
     var totalPages = Math.ceil(data.length / entriesPerPage);
     $('#currentPage').text(currentPage);
     $('#totalPages').text(totalPages);
 }
 
-// Function to generate page number buttons
 function generatePageNumbers() {
     var totalPages = Math.ceil(data.length / entriesPerPage);
     var pageNumbers = '';
@@ -300,7 +294,6 @@ function generatePageNumbers() {
     });
 }
 
-// Function to update table content based on current page
 function updateTable() {
     var startIndex = (currentPage - 1) * entriesPerPage;
     var endIndex = startIndex + entriesPerPage;
@@ -328,14 +321,12 @@ function updateTable() {
     generatePageNumbers();
 }
 
-// Event handler for changing the number of entries per page
 $('#entriesPerPage').change(function () {
-    currentPage = 1; // Reset current page to 1 when changing entries per page
+    currentPage = 1; 
     entriesPerPage = parseInt($(this).val());
     updateTable();
 });
 
-// Event handler for "Next" button
 $('#nextPageBtn').click(function () {
     var totalPages = Math.ceil(data.length / entriesPerPage);
     if (currentPage < totalPages) {
@@ -344,7 +335,6 @@ $('#nextPageBtn').click(function () {
     }
 });
 
-// Event handler for "Previous" button
 $('#prevPageBtn').click(function () {
     if (currentPage > 1) {
         currentPage--;
@@ -352,7 +342,6 @@ $('#prevPageBtn').click(function () {
     }
 });
 
-// Initial table population
 updateTable();
 
 particlesJS("particles-js", {
@@ -471,7 +460,7 @@ particlesJS("particles-js2", {
       }
     },
     "color": {
-      "value": "#000000" // Black color for particles
+      "value": "#000000" 
     },
     "shape": {
       "type": "circle",
@@ -511,7 +500,7 @@ particlesJS("particles-js2", {
     "line_linked": {
       "enable": true,
       "distance": 150,
-      "color": "#000000", // Black color for the particle lines
+      "color": "#000000", 
       "opacity": 0.4,
       "width": 1
     },
