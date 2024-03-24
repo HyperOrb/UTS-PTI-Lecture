@@ -58,50 +58,7 @@ function populateTable() {
       row.append($('<td>').text(item.nim));
       row.append($('<td>').text(item.name));
       row.append($('<td>').text(item.alamat));
-      var buttonsCell = $('<td>');
-      var editButton = $('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button>');
-      var deleteButton = $('<button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>');
-      
-      // Bind event handlers directly to the buttons
-      editButton.click(function () {
-          var nim = $(this).closest('tr').find('td:eq(0)').text(); // Get the nim from the clicked row
-          var item = data.find(entry => entry.nim === nim); // Find the corresponding item in the data array
-
-          // Populate edit modal fields with data
-          $('#editNIMInput').val(item.nim).prop('disabled', true);
-          $('#editNameInput').val(item.name);
-          $('#editAlamatInput').val(item.alamat);
-
-          $('#editModal').modal('show');
-
-          $('#editModalSave').off('click').on('click', function () {
-              var newName = $('#editNameInput').val();
-              var newAlamat = $('#editAlamatInput').val();
-              // Update the correct entry in the data array
-              item.name = newName;
-              item.alamat = newAlamat;
-              saveDataToLocalStorage();
-              // Repopulate the table based on the current page and sorting order
-              updateTable();
-              $('#editModal').modal('hide');
-              showFeedback('Data berhasil diubah.', 'info');
-          });
-      });
-
-      deleteButton.click(function () {
-          var nim = $(this).closest('tr').find('td:eq(0)').text(); // Get the nim from the clicked row
-          var index = data.findIndex(entry => entry.nim === nim); // Find the index of the corresponding item in the data array
-          if (confirm('Apakah yakin ingin menghapus?')) {
-              data.splice(index, 1);
-              saveDataToLocalStorage();
-              updateTable();
-              showFeedback('Data berhasil dihapus.', 'deleted');
-          }
-      });
-
-      buttonsCell.append(editButton);
-      buttonsCell.append(deleteButton);
-      row.append(buttonsCell);
+      row.append(generateButtons(item)); // Generate buttons for the row
       tableBody.append(row);
   }
 
@@ -111,6 +68,49 @@ function populateTable() {
   updatePaginationInfo();
   generatePageNumbers();
 }
+
+function generateButtons(item) {
+  var buttonsCell = $('<td>');
+  var editButton = $('<button class="btn btn-primary btn-sm edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button>');
+  var deleteButton = $('<button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-eraser"></i> Delete</button>');
+  
+  editButton.click(function () {
+      var nim = $(this).closest('tr').find('td:eq(0)').text();
+      var item = data.find(entry => entry.nim === nim);
+
+      $('#editNIMInput').val(item.nim).prop('disabled', true);
+      $('#editNameInput').val(item.name);
+      $('#editAlamatInput').val(item.alamat);
+
+      $('#editModal').modal('show');
+
+      $('#editModalSave').off('click').on('click', function () {
+          var newName = $('#editNameInput').val();
+          var newAlamat = $('#editAlamatInput').val();
+          item.name = newName;
+          item.alamat = newAlamat;
+          saveDataToLocalStorage();
+          updateTable();
+          $('#editModal').modal('hide');
+          showFeedback('Data berhasil diubah.', 'info');
+      });
+  });
+
+  deleteButton.click(function () {
+      var nim = $(this).closest('tr').find('td:eq(0)').text();
+      var index = data.findIndex(entry => entry.nim === nim);
+      if (confirm('Apakah yakin ingin menghapus?')) {
+          data.splice(index, 1);
+          saveDataToLocalStorage();
+          updateTable();
+          showFeedback('Data berhasil dihapus.', 'deleted');
+      }
+  });
+
+  buttonsCell.append(editButton);
+  buttonsCell.append(deleteButton);
+  return buttonsCell;
+} 
 
 
 
@@ -328,7 +328,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function sortTable(columnIndex) {
-    var rows = Array.from(table.querySelectorAll('tbody tr'));
+    var table = document.querySelector('.table');
+    var tbody = table.querySelector('tbody');
+    var rows = Array.from(tbody.querySelectorAll('tr'));
 
     rows.sort(function (rowA, rowB) {
         var cellA = rowA.cells[columnIndex].textContent.trim();
@@ -337,17 +339,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (columnIndex === 0 || columnIndex === 2) {
             return cellA.localeCompare(cellB);
         } else {
-            return cellA.localeCompare(cellB, undefined, { numeric: true });
+            return parseFloat(cellA) - parseFloat(cellB);
         }
     });
 
-    var tbody = table.querySelector('tbody');
-    tbody.innerHTML = ''; // Clear the table body
+    // Remove existing rows from the table
+    tbody.innerHTML = '';
 
+    // Re-append sorted rows to the table
     rows.forEach(function (row) {
         tbody.appendChild(row);
     });
 }
+
 
 });
 // Function to toggle dark mode
