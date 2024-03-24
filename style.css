@@ -4,14 +4,6 @@ body {
   font-style: normal;
 }
 
-.background-image {
-  background-image: url('ocen.jpg');
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat;
-}
-
-
 .navbar {
   background-color: #322e30;
 }
