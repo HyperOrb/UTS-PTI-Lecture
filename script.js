@@ -221,35 +221,11 @@ function showFeedback(message, type) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  var table = document.querySelector('.table');
-  var headers = table.querySelectorAll('th');
-  
-  headers.forEach(function (header, index) {
-      header.addEventListener('click', function () {
-          sortTable(index);
-      });
+document.querySelectorAll('.sortable').forEach(header => {
+  header.addEventListener('click', () => {
+      const columnIndex = Array.from(header.parentNode.children).indexOf(header);
+      sortTable(columnIndex);
   });
-
-  function sortTable(columnIndex) {
-      var rows = Array.from(table.querySelectorAll('tbody tr'));
-
-      rows.sort(function (rowA, rowB) {
-          var cellA = rowA.cells[columnIndex].textContent.trim();
-          var cellB = rowB.cells[columnIndex].textContent.trim();
-
-          if (columnIndex === 0 || columnIndex === 2) {
-              return cellA.localeCompare(cellB);
-          } else {
-              return cellA.localeCompare(cellB, undefined, { numeric: true });
-          }
-      });
-
-      var tbody = table.querySelector('tbody');
-      rows.forEach(function (row) {
-          tbody.appendChild(row);
-      });
-  }
 });
 function toggleDarkMode() {
   var darkModeEnabled = document.body.classList.toggle('dark-mode');
